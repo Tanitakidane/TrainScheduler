@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Train Scheduler</title>
+    
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="shortcut icon" type="image/x-icon" href="Train.ico">
+</head>
+<body>
+    <div class="jumbotron">
+        <h1 class="display-4">Train Scheduler</h1>
+    </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="card schedule">
+                        <div class="card-header lead">
+                            Current Train Schedule
+                        </div>
+                        <div class="card-body">
+                            <table class="table table-striped">
+                                    <thead>
+                                      <tr>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Destination</th>
+                                        <th scope="col">Frequency (min)</th>
+                                        <th scope="col">Next Arrival</th>
+                                        <th scope="col">Time to Arrival (min)</th>
+                                      </tr>
+                                    </thead>
+                                    <tbody id="trains"></tbody>
+                            </table>                           
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card form-add">
+                        <div class="card-header lead">
+                            Add Train
+                        </div>
+                        <div class="card-body">
+                            <form>
+                                <label for="train-name">Train Name <br>
+                                    <input class="rounded" type="text" id="train-name">
+                                </label>
+                                <label for="destination">Destination <br>
+                                    <input class="rounded" type="text" id="destination">
+                                </label>
+                                <label for="first-train">First Train Time (hh:mm-military)<br>
+                                    <input class="rounded" type="time" id="first-train">
+                                </label>
+                                <label for="frequency">Frequency (min) <br>
+                                    <input class="rounded" type="text" id="frequency">
+                                </label> 
+                                <br>
+                                <input class="btn btn-primary" type="submit" value="Add Train" id="add-train">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+    
+<script src="/__/firebase/7.13.1/firebase-app.js"></script>
+<script src="/__/firebase/7.13.1/firebase-analytics.js"></script>
+<script src="/__/firebase/init.js"></script>
+<script type="text/javascript" src="JavaScript.js"></script></body>
+</html>

@@ -1,0 +1,146 @@
+body {
+    background-color: #D3D3D3;
+    background-image: url(../images/30thststation.jpg);
+    background-size: cover;
+    box-shadow: inset 0 0 0 1000px rgba(0,0,0,.4);
+    height: 100vh;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.jumbotron {
+    background-color: rgba(0, 0 , 0, 0);
+    color: #F2F2F2;
+}
+
+.display-4 {
+    margin-left: 1em;
+}
+
+.container {
+    margin-bottom: 2em;
+}
+
+input {
+    margin: .5em 0;
+    border: 1px solid #D3D3D3;
+}
+
+.card,
+.card-header,
+.card-body,
+.schedule {
+    background-color:rgba(255,255,255,.75);
+}
+
+.card-header {
+    color: #0039a6;
+}
+
+.card {
+    margin: 0 .75em;
+}
+
+.btn {
+    background-color: #0039a6;
+    border: 1px solid #0039a6;
+}
+
+.btn:hover {
+    background-color: #004BDB;
+    border: 1px solid #0039a6;
+}
+
+@media screen and (max-width: 980px) {
+    .card {
+        width: 120%;
+        overflow: visible;
+    }
+
+    .schedule {
+        position: relative;
+        right: 6.5rem;
+    }
+
+    input {
+        margin: .3em 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .schedule {
+        position: relative;
+        right: 2rem;
+        width: 100%;
+        margin: auto;
+        overflow-x: scroll;
+        overflow-y: scroll;
+    }
+    
+    .schedule::-webkit-scrollbar {
+        width: 2px;
+        background-color: transparent;
+    }
+
+    .col-md-4 {
+        position: relative;
+        right: 2rem;
+        width: 85%;
+        margin: 0;
+    }
+
+    .form-add {
+        height: 20rem;
+        margin: 2rem 0;
+    }
+
+}
+
+@media screen and (max-width: 640px) {
+    
+    .schedule {
+        position: relative;
+        left: .4rem;
+        background-color:rgba(255,255,255,.75);
+        width: 90%;
+        margin: auto;
+        overflow: scroll;
+    }
+
+    .schedule::-webkit-scrollbar {
+        width: 2px;
+        background-color:rgba(255,255,255,.75);
+    }
+
+    .card {
+        width: 100%;
+    }
+
+    .col-md-4 {
+        position: relative;
+        left: .4rem;
+        width: 90%;
+        margin: 2rem 0;
+    }
+
+}
+
+@media screen and (max-width: 380px) {
+
+    .schedule {
+        width: 90%;
+        margin: auto;
+        overflow: scroll;
+        background-color:rgba(255,255,255,.75);
+    }
+    
+    .schedule::-webkit-scrollbar {
+        width: 2px;
+        background-color:rgba(255,255,255,.75);
+    }
+
+    .col-md-4 {
+        width: 90%;
+        margin: 2rem 0;
+    }
+    
+}
