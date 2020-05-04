@@ -1,6 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+
+    <style>
+        .loader {
+          border: 16px solid #f3f3f3;
+          border-radius: 50%;
+          border-top: 16px solid #3498db;
+          width: 120px;
+          height: 120px;
+          -webkit-animation: spin 2s linear infinite; /* Safari */
+          animation: spin 2s linear infinite;
+          position:absolute;
+          margin-left: 300px;
+          margin-top: 100px;
+        }
+        
+        /* Safari */
+        @-webkit-keyframes spin {
+          0% { -webkit-transform: rotate(0deg); }
+          100% { -webkit-transform: rotate(360deg); }
+        }
+        
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+        </style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -32,11 +58,14 @@
                                         <th scope="col">Time to Arrival (min)</th>
                                       </tr>
                                     </thead>
-                                    <tbody id="trains"></tbody>
+                                    <tbody id="trains">
+
+                                    </tbody>
                             </table>                           
                         </div>
                     </div>
                 </div>
+                <div class="loader" style="display: none;"></div>
                 <div class="col-md-4">
                     <div class="card form-add">
                         <div class="card-header lead">
@@ -45,19 +74,22 @@
                         <div class="card-body">
                             <form>
                                 <label for="train-name">Train Name <br>
-                                    <input class="rounded" type="text" id="train-name">
+                                    <input class="rounded" type="text" name="trainname" id="train-name">
                                 </label>
                                 <label for="destination">Destination <br>
-                                    <input class="rounded" type="text" id="destination">
+                                    <input class="rounded" type="text" name="destination" id="destination">
                                 </label>
                                 <label for="first-train">First Train Time (hh:mm-military)<br>
-                                    <input class="rounded" type="time" id="first-train">
+                                    <input class="rounded" type="time" name="firsttraintime" id="first-train">
                                 </label>
                                 <label for="frequency">Frequency (min) <br>
-                                    <input class="rounded" type="text" id="frequency">
+                                    <input class="rounded" type="text" name="frequency" id="frequency">
+                                </label> 
+                                <label for="frequency">Time to Arrival <br>
+                                    <input class="rounded" type="text" name="frequency" id="timetoarrival">
                                 </label> 
                                 <br>
-                                <input class="btn btn-primary" type="submit" value="Add Train" id="add-train">
+                                <input class="btn btn-primary" type="button" onclick="writeData()" value="Add Train" id="add-train">
                             </form>
                         </div>
                     </div>
@@ -65,8 +97,117 @@
             </div>
     </div>
     
-<script src="/__/firebase/7.13.1/firebase-app.js"></script>
-<script src="/__/firebase/7.13.1/firebase-analytics.js"></script>
-<script src="/__/firebase/init.js"></script>
-<script type="text/javascript" src="JavaScript.js"></script></body>
+
+    <!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+
+    <script src="https://www.gstatic.com/firebasejs/4.3.0/firebase.js"></script>
+<script>
+  // Your web app's Firebase configuration
+  var firebaseConfig = {
+    apiKey: "AIzaSyBiklq_fWH1tksrurTenkdkTdBTjRX_UQA",
+    authDomain: "teacheron-98056.firebaseapp.com",
+    databaseURL: "https://teacheron-98056.firebaseio.com",
+    projectId: "teacheron-98056",
+    storageBucket: "teacheron-98056.appspot.com",
+    messagingSenderId: "273388556972",
+    appId: "1:273388556972:web:6e0714b553f01bcd884509",
+    measurementId: "G-GLLKGYKP4H"
+  };
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  firebase.analytics();
+
+
+
+</script>
+<script>
+function writeData()
+{
+
+let trainname=document.getElementById("train-name").value;
+let destination=document.getElementById("destination").value;
+let firsttraintime=document.getElementById("first-train").value;
+let frequency=document.getElementById("frequency").value
+let timetoarrival=document.getElementById("timetoarrival").value;
+
+if(trainname=="" || destination =="" || firsttraintime=="" || frequency=="")
+{
+    Swal.fire({
+  icon: 'error',
+  title: 'Oops...',
+  text: 'Something went wrong!',
+  footer: 'Please input all the required fields'
+})
+}
+
+else{
+
+    var reference =  firebase.database().ref("trainschedule"+trainname);
+    reference.set({
+
+        trainname:trainname,
+        destination:destination,
+        firsttraintime:firsttraintime,
+        frequency:frequency,
+        timetoarrival:timetoarrival
+
+
+
+
+    },()=>{
+        Swal.fire(
+  'Good job!',
+  'Data Saved',
+  'success'
+)
+document.getElementById("train-name").value="";
+document.getElementById("destination").value="";
+document.getElementById("first-train").value="";
+document.getElementById("frequency").value="";
+document.getElementById("timetoarrival").value="";
+
+
+    })
+
+}
+
+
+
+}
+
+
+
+function getData()
+{
+    $(".loader").css("display","block");
+
+    var db = firebase.database();
+var ref = db.ref("/");
+ref.on("child_added", function(snapshot) {
+
+   $("#trains").append(`<tr>
+    <td>${snapshot.val().trainname}</td>
+    <td>${snapshot.val().destination}</td>
+    <td>${snapshot.val().frequency}</td>
+    <td>${snapshot.val().firsttraintime}</td>
+    <td>${snapshot.val().timetoarrival}</td>
+   
+  
+    
+    
+    </tr>`)
+ 
+    $(".loader").css("display","none");
+});
+
+}
+getData()
+</script>
+
+
+
+</body>
 </html>
